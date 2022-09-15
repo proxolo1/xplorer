@@ -1,6 +1,7 @@
 let employeeData;
+loadEmployeeTable();
 
-function loadData() {
+function loadEmployeeTable() {
   let tableBody = document.querySelector("tbody");
   const xhr = new XMLHttpRequest();
   xhr.onload = function () {
@@ -15,9 +16,8 @@ function loadData() {
       employeeName.innerHTML = `${employee.name}`;
       employeeProject.innerHTML = `${employee.project}`;
       employeePhone.innerHTML = `${employee.phone}`;
-      action.innerHTML = `<td> <a class="add" title="Add" data-toggle="tooltip"><i
-      class="material-icons">&#xE03B;</i></a>
-  <a class="edit" title="Edit" data-toggle="tooltip"><i
+      action.innerHTML = `<td> 
+  <a class="edit" title="Edit" data-bs-toggle="modal" data-bs-target="#employeeEdit" data-toggle="tooltip" onClick="edit(event)"><i
       class="material-icons">&#xE254;</i></a>
   <a onclick="deleteEmployee(event)" class="delete" title="Delete" data-toggle="tooltip"><i
       class="material-icons">&#xE872;</i></a></td>`;
@@ -32,39 +32,51 @@ function loadData() {
   xhr.send();
 }
 
-loadData();
+
 function addEmployee() {
-  let employee={
-    name:"",
-    email:"",
-    project:"",
-    phone:""
+  let employee = {
+    name: "",
+    email: "",
+    project: "",
+    phone: ""
   }
   // let inputs = document.querySelectorAll("input");
-  let name=document.getElementById('name');
-  let email=document.getElementById('email');
-  let phone=document.getElementById('phone');
+  let name = document.getElementById('name');
+  let email = document.getElementById('email');
+  let phone = document.getElementById('phone');
   var project = document.querySelector("#project");
   var option = project.options[project.selectedIndex];
-  var url="https://api/post"
-  console.log(name.value,email.value,phone.value)
-   employee.name=name.value
-   employee.email=email.value
-   employee.project=option.value
-   employee.phone=phone.value
+  var url = "https://api/post"
+  console.log(name.value, email.value, phone.value)
+  employee.name = name.value
+  employee.email = email.value
+  employee.project = option.value
+  employee.phone = phone.value
 
-  const xhr=new XMLHttpRequest();
-  xhr.open('POST',url,true)
-  xhr.setRequestHeader('content-type','application/json; charset=UTF-8')
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', "http://localhost:8080/employee", true)
+  xhr.setRequestHeader('content-type', 'application/json; charset=UTF-8')
   xhr.send(JSON.stringify(employee))
-  xhr.onload=function(){
-    if(xhr.status===201){
+  xhr.onload = function () {
+    if (xhr.status === 201) {
       console.log('post successfully created')
     }
   }
 }
 
-function deleteEmployee(event){
+function deleteEmployee(event) {
   console.log(event.path[3])
-  event.path[3].innerHTML=null;
+  event.path[3].innerHTML = null;
+}
+function editEmployee(event) {
+  console.log(event)
+}
+function edit(event) {
+  let coloum = event.path[3].cells;
+  let editArr = [document.getElementById('edit_name'), document.getElementById('edit_project'), document.getElementById('edit_phone')]
+  for (let i = 0; i < coloum.length - 1; i++) {
+    console.log(coloum[i].innerText)
+    editArr[i].value = coloum[i].innerText;
+  }
+
 }
