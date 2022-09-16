@@ -150,7 +150,7 @@
     }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="manage.js"></script>
+
 
 <body>
     <canvas id="canvas"></canvas>
@@ -319,7 +319,7 @@
                         <div class="table-title">
                             <div class="row">
                                 <div class="col-sm-8">
-                                    <h2>Employee <b>Details</b></h2>
+                                    <h2>Project <b>Details</b></h2>
                                 </div>
                                 <div class="col-sm-4">
                                     <button type="button" class="btn btn-outline-light add-new" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-plus"></i> Add
@@ -330,14 +330,14 @@
                         <table class="table table-bordered text-capitalize">
                             <thead>
                                 <tr>
-                                    <th>Project Id</th>
-                                    <th>Project Name</th>
+                                    <th>projectId</th>
+                                    <th>projectName</th>
                                     <th>Allocation</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <!-- <tr>
                                     <td>723351</td>
                                     <td>Administration</td>
                                     <td>Trivandrum</td>
@@ -375,7 +375,7 @@
                                         <a class="delete" title="Delete" data-toggle="tooltip"><i
                                                 class="material-icons">&#xE872;</i></a>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -385,17 +385,17 @@
     </div>
     </div>
     <div class=" text-dark modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog ">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title text-primary" id="exampleModalLabel">Add employee</h5>
+              <h5 class="modal-title text-primary" id="exampleModalLabel">Add project</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="container">
                 <form id="contact" action="" method="post">
                     <fieldset>
-                      <input
+                      <input id="name"
                         placeholder="Project name"
                         type="text"
                         tabindex="1"
@@ -404,7 +404,7 @@
                       />
                     </fieldset>
                     <fieldset>
-                      <input
+                      <input id="alloc"
                         placeholder=" Allocation"
                         type="text"
                         tabindex="2"
@@ -530,6 +530,46 @@
             canvas.width=window.innerWidth;
             canvas.height= window.innerHeight;
         })
+
+    </script>
+    <script>
+      function projectTable(){
+        let tbody=document.querySelector("tbody")
+        let xml=new XMLHttpRequest()
+        xml.open("GET","./project.json")
+        xml.send()
+        xml.onload=function(){
+          let projectdata=JSON.parse(this.responseText)
+          projectdata.forEach((project)=>{
+            let row=document.createElement('tr')
+            let projectid=document.createElement('td')
+            let projectname=document.createElement('td')
+            let allocation=document.createElement('td')
+            let action=document.createElement('td')
+            projectid.innerHTML=`${project.projectId}`
+            projectname.innerHTML=`${project.projectName}`
+            allocation.innerHTML=`${project.allocation}`
+            action.innerHTML=`<td> 
+              
+  <a class="edit" title="Edit" data-bs-toggle="modal" data-bs-target="#employeeEdit" data-toggle="tooltip" onClick="edit(event)"><i
+      class="material-icons">&#xE254;</i></a>
+  <a onclick="deleteproject(event)" class="delete" title="Delete" data-toggle="tooltip"><i
+      class="material-icons">&#xE872;</i></a></td>`;
+      row.append(projectid)
+      row.append(projectname)
+      row.append(allocation)
+      row.append(action)
+      tbody.append(row)
+          } )
+        }
+      }
+projectTable()
+function deleteproject(event){
+// console.log(event.path[3])
+event.path[3].innerHTML=null
+}
+
+
     </script>
 </body>
 

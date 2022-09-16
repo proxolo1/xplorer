@@ -1,19 +1,19 @@
 [{
-    "projectId":"ajay",
+    "projectId":"Ajay",
     "projectName":"delivery",
-    "allocation":"8542155477"
+    "allocation":"TVM"
 },
 {
-    "projectId":"ajay",
-    "projectName":"delivery",
-    "allocation":"8542155477"
+    "projectId":"Sneha",
+    "projectName":"wallmart",
+    "allocation":"Banglore"
 },{
-    "projectId":"ajay",
+    "projectId":"Reema",
     "projectName":"delivery",
-    "allocation":"8542155477"
+    "allocation":"Kochi"
 },
 {
-    "projectId":"ajay",
-    "projectName":"delivery",
-    "allocation":"8542155477"
+    "projectId":"Shaik",
+    "projectName":"darwin box",
+    "allocation":"Hydrabad"
 }]

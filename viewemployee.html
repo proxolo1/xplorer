@@ -36,6 +36,7 @@
     }
 
     .table-wrapper {
+        /* width: 700px; */
         margin: 30px auto;
         background: rgba(0, 0, 0, 0.475);
         color: white;
@@ -331,9 +332,10 @@
                         <tr>
                             <th>Id  </th>
                             <th>Name</th>
+                            <th>email</th>
                             <th>project</th>
                             <th>Phone</th>
-                            <th>Actions</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
@@ -544,7 +546,7 @@
       </div>
     </div>
   </div>
-<script src="manage.js"></script>
+
 <script>
     let canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
@@ -626,6 +628,43 @@
             canvas.width=window.innerWidth;
             canvas.height= window.innerHeight;
         })
+    </script>
+    <script>
+        let params = (new URL(document.location)).searchParams;
+        let tableBody = document.querySelector("tbody");
+        console.log(params)
+        const id=params.get("id");
+        console.log(id)
+        const xhr=new XMLHttpRequest();
+        xhr.open("GET","./employee.json");
+        xhr.send();
+        xhr.onload=function(){
+            let employeeData=JSON.parse(this.responseText);
+            employeeData.forEach(employee=>{
+                if(employee.id==id){
+                    let row = document.createElement("tr");
+      let employeeId=document.createElement("td");
+      let employeeName = document.createElement("td");
+      let employeeProject = document.createElement("td");
+      let employeePhone = document.createElement("td");
+    
+      let email=document.createElement("td")
+      employeeId.innerHTML=`${employee.id}`;
+      employeeName.innerHTML = `${employee.name}`;
+      employeeProject.innerHTML = `${employee.project}`;
+      employeePhone.innerHTML = `${employee.phone}`;
+      email.innerHTML=`${employee.email} `
+   
+      row.append(employeeId);
+      row.append(employeeName);
+      row.append(email)
+      row.append(employeeProject);
+      row.append(employeePhone);
+     
+      tableBody.append(row);
+                }
+            })
+        }
     </script>
 </body>
 
