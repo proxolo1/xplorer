@@ -38,6 +38,9 @@
     li {
       list-style: none;
     }
+    .welcome{ 
+      font-size: 20vh;
+    }
   </style>
 
   <body>
@@ -207,8 +210,8 @@
           </div>
         </div>
         
-        <div class="col-md-9 bg-dark text-center ">
-          <span class="text-light">WELCOME</span>
+        <div class="col-md-9 text-center ">
+          <span class="text-light welcome"><canvas id="welcome"></canvas></span>
         </div>
       </div>
       <div class="row text-center">
@@ -249,7 +252,7 @@
       let canvas = document.getElementById("canvas");
       const ctx = canvas.getContext("2d");
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = window.outerHeight;
       let stars = [];
       // stars.push({
       //     x:canvas.width/2,
@@ -313,6 +316,10 @@
         });
       }
       setInterval(drawStars, 20);
+      const welcome=document.getElementById("welcome");
+      const ctx1=welcome.getContext("2d");
+      ctx1.font = "30px Arial";
+ctx1.fillText("Hello World", 10, 50);
     </script>
   </body>
 </html>
