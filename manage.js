@@ -19,10 +19,10 @@ function loadEmployeeTable() {
       employeeProject.innerHTML = `${employee.project}`;
       employeePhone.innerHTML = `${employee.phone}`;
       action.innerHTML = `<td> 
-      
-   <a onClick=viewEmployee(${employee.id})><img src="https://img.icons8.com/stickers/30/000000/visible.png"/></a>
-  <a class="edit" title="Edit" data-bs-toggle="modal" data-bs-target="#employeeEdit" data-toggle="tooltip" onClick="editEmployee(${employee.id})"><img src="https://img.icons8.com/stickers/30/000000/edit--v1.png"/></a>
-  <a onclick="deleteEmployee(${employee.id})" class="delete" title="Delete" data-toggle="tooltip"><img src="https://img.icons8.com/stickers/30/000000/trash.png"/></a></td>`;
+   <a onClick=viewEmployee(${employee.id}) data-toggle="tooltip" title="view"><img src="https://img.icons8.com/ios-glyphs/20/FFFFFF/view-file.png"/></a>
+  <a class="edit" title="Edit" data-bs-toggle="modal" data-bs-target="#employeeEdit" data-toggle="tooltip" onClick="editEmployee(${employee.id})"><img src="https://img.icons8.com/sf-black-filled/20/FFFFFF/edit.png"/></a>
+  <a onclick="deleteEmployee(${employee.id})" class="delete" title="Delete" data-toggle="tooltip"><i
+      class="material-icons"><img src="https://img.icons8.com/material-rounded/20/FFFFFF/trash.png"/></i></a></td>`;
       row.append(employeeId);
       row.append(employeeName);
       row.append(employeeProject);
@@ -68,7 +68,7 @@ function addEmployee() {
 }
 
 function deleteEmployee(id) {
-  console.log(id)
+  
 }
 function editEmployee(id) {
   console.log(id)
