@@ -40,7 +40,9 @@
     }
 
   .card{
-    width: 50vh;
+    /* width: 50vh; */
+    box-shadow: inset 2px 0px 8px 4px rgb(223 223 223 / 64%);
+    margin-left: 14vh;
   }
 
     a,
@@ -183,8 +185,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3"></div>
-            <div class="col-md-3">
+           
+            <div class="col-md-9">
                 <div class="container">
                     <div class="card text-center">
                         
@@ -195,7 +197,7 @@
                                </div>
                             </div>
                           <h5 class="card-title text-capitalize text-dark"></h5>
-                          <div class="details text-start">
+                          <div class="details text-center">
                              <p class="card-text text-dark">Email : <a class="email text-primary"></a></p>
                           <p class="text-dark">Project : <span class="project text-success"></span></p>
                           <p class="text-dark">Phone number : <span class="phone text-success"></span></p>
@@ -219,7 +221,7 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     let stars = [];
-    let backgroundCanvas = "black";
+    let backgroundCanvas = "white";
 
     let str = ""
     let keyCode = [];
@@ -234,7 +236,7 @@
         this.raidus = Math.floor(Math.random() * 4);
         this.vx = .3;
         this.vy = -1;
-        this.color = `rgba(255,255,255,.5)`;
+        this.color = `rgba(0,0,0,.5)`;
         this.direction = Math.PI * .5;
     };
     let countStars = 2000;

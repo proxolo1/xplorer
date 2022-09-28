@@ -151,7 +151,9 @@
         /* color: cyan; */
         background-color: rgba(0, 0, 0);
     }
-    
+    .name,.project{
+        cursor: pointer;
+    }
     @media screen and (max-width:700px) {
         .table-wrapper {
             width: 450px;
@@ -314,8 +316,8 @@
                             <thead>
                                 <tr>
                                     <th>Id </th>
-                                    <th>Name</th>
-                                    <th>project</th>
+                                    <th class="name">Name <sup>&#8593</sup></th>
+                                    <th class="project">project <sup>&#8593</sup></th>
                                     <th>Phone</th>
                                     <th>Actions</th>
                                 </tr>
