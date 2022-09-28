@@ -88,7 +88,7 @@ theadName.addEventListener('click', (e) => {
   }
 })
 theadProject.addEventListener('click', (e) => {
-
+  
   let sortedEmployeeData;
   const xhr = new XMLHttpRequest();
   xhr.open("GET", "http://localhost:8080/get-employees");
