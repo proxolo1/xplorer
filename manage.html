@@ -18,7 +18,7 @@
     input {
         margin-bottom: 2vh;
     }
-   
+
     .row {
         margin-top: 20px
     }
@@ -141,22 +141,47 @@
         text-decoration: none;
         color: black;
     }
-    .attention{
-        width:4vh;
+
+    .attention {
+        width: 4vh;
     }
-    
-    tr:hover{
+
+    tr:hover {
         /* background-color:rgba(255, 255, 255, 0.444); */
         /* color: white; */
         /* color: cyan; */
         background-color: rgba(0, 0, 0);
     }
-    .name,.project{
+
+    .name,
+    .project {
         cursor: pointer;
     }
-    thead{
-      background-color: black !important;
-  }
+
+    thead {
+        background-color: black !important;
+    }
+
+    .goku {
+        height: 8vh;
+        width: 11vh;
+    }
+
+    .goku-image {
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-image: url(./icons/MicrosoftTeams-image\ \(2\).png);
+        z-index: -2;
+        position: relative;
+        transition: 2s ease-in-out;
+    }
+  
+    .table-block{
+        background-color: black;
+    }
+   
+    
     @media screen and (max-width:700px) {
         .table-wrapper {
             width: 450px;
@@ -168,21 +193,44 @@
             border-radius: 20px;
         }
     }
-    .accordion-button{
-        background:black !important;
+
+    .accordion-button {
+        background: black !important;
         color: white !important;
     }
-    li a{
-        
+
+    li a {
+
         color: white !important;
     }
-    li a:hover{
-        color:blue !important;
+
+    li a:hover {
+        color: blue !important;
     }
-    .accordion-body{
-        background:black !important;
+
+    .accordion-body {
+        background: black !important;
     }
-   
+    .left-eye,.right-eye{
+        background-image: url( ./icons/MicrosoftTeams-image\ \(3\).png);
+        height: 2vh;
+    width: 2vh;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    }
+    .left-eye{
+     
+    top: 3vh;
+    transform: rotate(45deg);
+    left: 2vh;
+    }
+    .right-eye{
+     
+    top: 1vh;
+    transform: rotate(45deg);
+    left: 7vh;
+    }
 </style>
 
 <body>
@@ -217,8 +265,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne" aria-expanded="true"
-                                    aria-controls="collapseOne">
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     Home
                                 </button>
                             </h2>
@@ -315,8 +362,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-9">
-                <div class="container border">
+            <div class="col-md-9 col-sm-12">
+                <div class="goku">
+                    <div class="goku-image">
+                        <div class="eyes">
+                            <div class="left-eye"></div>
+                            <div class="right-eye"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="container border table-block">
                     <div class="table-wrapper col">
                         <div class="table-title">
                             <div class="row">
@@ -330,7 +386,8 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-bordered text-white bg-opacity-75 bg-dark table-responsive text-capitalize">
+                        <table
+                            class="table table-bordered text-white bg-opacity-75 bg-dark table-responsive text-capitalize">
                             <thead>
                                 <tr>
                                     <th>Id </th>
@@ -341,44 +398,46 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              
+
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-        
-            <div class="row border my-5 text-center">
-            <span><img src="https://img.icons8.com/ios-glyphs/30/000000/github.png"/></span>
-        </div> 
-        
-       
+
+        <div class="row border my-5 text-center">
+            <span><img src="https://img.icons8.com/ios-glyphs/30/000000/github.png" /></span>
+        </div>
+
+
     </div>
     </div>
 
     <!-- modal of delete -->
     <!-- Button trigger modal -->
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-center" id="exampleModalLabel"><img class="attention" src="./icons/icons8-box-important.gif" alt=""></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLabel"><img class="attention"
+                            src="./icons/icons8-box-important.gif" alt=""></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-danger">
+                    ARE YOU SURE YOU WANT TO DO THIS?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">NO</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                        onclick="deleteEmployee()">YES</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body text-danger">
-         ARE YOU SURE YOU WANT TO DO THIS?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal">NO</button>
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="deleteEmployee()">YES</button>
-        </div>
-      </div>
     </div>
-  </div>
-  
+
 </body>
 
 </html>
@@ -442,29 +501,13 @@
         })
     }
     setInterval(drawStars, 20);
-    // document.addEventListener("keydown", (event) => {
-    //    str+=event.key;
-    // //    event.preventDefault();
-    //    if(event.code=="Space") {
-    //     backgroundCanvas="#0B5269";
-    //     stars.forEach(star =>
-    //     star.color="black")
-    //     str="";
-    //     // alert("dark mode activated")
-    //    }
-    //    else if(event.altKey) {
-    //     backgroundCanvas="black";
-    //     stars.forEach(star =>
-    //     star.color="white")
-    //     str="";
-    //    }
-
-    // })
+  
     document.addEventListener('resize', () => {
         console.log("hello")
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     })
+   
 </script>
 </body>
 

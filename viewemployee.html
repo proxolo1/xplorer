@@ -415,7 +415,7 @@
     const id = params.get("id");
     
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", `http://localhost:8080/get-employee/${id}`);
+    xhr.open("GET", `http://localhost:8080/api/get-employee/${id}`);
     xhr.send();
     xhr.onload = function () {
         let employee=JSON.parse(this.responseText);

@@ -145,58 +145,7 @@ body {
             <div class="container-fluid">
         
                 <div class="row">
-                    <!-- <div class="col-3">
-                        <div class="row">
-            
-            
-                            <div class="accordion" id="accordionPanelsStayOpenExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                            aria-controls="panelsStayOpen-collapseOne">
-                                            Dashboard
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse "
-                                        aria-labelledby="panelsStayOpen-headingOne">
-                                        <div class="accordion-body">
-                                            <a href="dashboard.html">Dashboard</a>
-                                        </div>
-                                    </div>
-                                </div>
-            
-                            </div></div>
-                            <div class="row">
-            
-                                <div class="accordion" id="accordionPanelsStayOpenExample">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                                aria-controls="panelsStayOpen-collapseOne">
-                                               Manage Employee
-                                            </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse "
-                                            aria-labelledby="panelsStayOpen-headingOne">
-                                            <div class="accordion-body">
-                                                <ul>
-                                                    <li>
-                                                       <a href="manage.html">view employees</a> 
-                                                    </li> -->
-                                                    <!-- <li>
-                                                        <a href="">add/edit</a> 
-                                                     </li> -->
-                                                <!-- </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-            
-                                </div>
-                            </div>
-            
-                        </div> -->
+               
                         <div class="col">
                             <div class="wrapper">
                                 <div class="logo">
@@ -205,25 +154,25 @@ body {
                                 <div class="text-center mt-4 name">
                                     Register employee
                                 </div>
-                                <form class="p-3 mt-3">
+                                <div class="p-3 mt-3">
                                     <div class="form-field d-flex align-items-center">
                                         <span class="far fa-user"></span>
                                         <input type="text" name="userName" id="userName" placeholder="name" title="proxolo" required>
                                     </div>
                                     <div class="form-field d-flex align-items-center">
                                         <span class="fas fa-key"></span>
-                                        <input type="email" name="age" id="pwd" placeholder="email" required title="proxolo@gmail.com" pattern="[^@\s]+@[^@\s]+">
+                                        <input type="email" name="age" id="email" placeholder="email" required title="proxolo@gmail.com" pattern="[^@\s]+@[^@\s]+">
                                     </div>
                                     <div class="form-field d-flex align-items-center">
                                         <span class="fas fa-key"></span>
-                                        <input type="date" name="age" id="pwd" placeholder="dob" title="11/03/1000" min="1900-01-01" max="2000-12-30">
+                                        <input type="date" name="age" id="dob" placeholder="dob" title="11/03/1000" min="1900-01-01" max="2000-12-30">
                                     </div>
                                     <div class="form-field d-flex align-items-center">
                                         <span class="fas fa-key"></span>
-                                        <input type="password" name="age" id="pwd" placeholder="password" title="Password1$" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$">
+                                        <input type="password" name="age" id="password" placeholder="password" title="Password1$" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$">
                                     </div>
-                                    <button class="btn mt-3">register</button>
-                                </form>
+                                    <button class="btn mt-3" onclick="register()">register</button>
+                                </div>
                                 <div class="text-center fs-6">
                                        <a href="login.html">already registered ?</a>
                                 </div>
@@ -236,6 +185,26 @@ body {
         <!-- <footer class="bg-primary">
             hello
         </footer> -->
+        <script>
+                function register(){
+                    let userName=document.querySelector("#userName");
+                    let email=document.querySelector("#email");
+                    let date=document.querySelector("#dob");
+                    let password=document.querySelector("#password");
+                    let userObj={
+                        name:userName.value,
+                        email:email.value,
+                        password:password.value
+                    }
+                    const xhr=new XMLHttpRequest();
+                    xhr.open("POST","http://localhost:8080/auth/register");
+                    xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+                    xhr.send(JSON.stringify(userObj));
+                    xhr.onload=function(){
+                        console.log(this);
+                    }
+                }
+        </script>
 </body>
 
 </html>
