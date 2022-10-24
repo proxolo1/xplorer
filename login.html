@@ -163,9 +163,58 @@
     <div class="container-fluid">
 
         <div class="row">
+            <!-- <div class="col-3">
+                <div class="row">
+    
+    
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                    aria-controls="panelsStayOpen-collapseOne">
+                                    Dashboard
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse "
+                                aria-labelledby="panelsStayOpen-headingOne">
+                                <div class="accordion-body">
+                                    <a href="dashboard.html">Dashboard</a>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div></div>
+                    <div class="row">
+    
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                        aria-controls="panelsStayOpen-collapseOne">
+                                       Manage Employee
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse "
+                                    aria-labelledby="panelsStayOpen-headingOne">
+                                    <div class="accordion-body">
+                                        <ul>
+                                            <li>
+                                               <a href="manage.html">view employees</a> 
+                                            </li> -->
+            <!-- <li>
+                                                <a href="">add/edit</a> 
+                                             </li> -->
+            <!-- </ul>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div> -->
 
-
-        
+        </div>
         <div class="col">
             <div class="wrapper">
                 <div class="logo">
@@ -176,15 +225,18 @@
                     Login
                 </div>
                 <div class="p-3 mt-3">
+
                     <div class="form-field d-flex align-items-center">
                         <span class="far fa-user"></span>
-                        <input type="text" name="email" id="email" placeholder="Email">
+                        <input type="text" name="email" id="email" placeholder="Email" required>
                     </div>
                     <div class="form-field d-flex align-items-center">
                         <span class="fas fa-key"></span>
-                        <input type="password" name="password" id="pwd" placeholder="Password">
+                        <input type="password" name="password" id="pwd" placeholder="Password" required>
                     </div>
                     <button class="btn mt-3" onclick="login()">Login</button>
+
+
                 </div>
                 <div class="text-center fs-6">
                     <a href="register.html">Sign up</a>
@@ -196,27 +248,34 @@
     </div>
     <script>
         function login() {
-            let email = document.querySelector('#email');
-            let pwd = document.querySelector('#pwd');
-            let emailAndPwd = new Object({
-                email: email.value,
-                password: pwd.value
-            })
-            console.log(emailAndPwd)
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://localhost:8080/auth/login");
-            xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
-            xhr.send(JSON.stringify(emailAndPwd));
-            xhr.onload = function () {
-                console.log(this)
-                if(this.status==202){
-                    location.href="http://127.0.0.1:5500/manage.html"
+            let loginUrl = "http://localhost:8080/auth/login"
+            let emailAndPassword = new Object({
+                email: document.getElementById("email").value,
+                password: document.getElementById("pwd").value
+            });
+            for (let key in emailAndPassword) {
+                if (!emailAndPassword[key]) {
+                    alert(key + " required");
+                    return;
                 }
-                // location.href="./manage.html";
             }
 
-        }
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", loginUrl, true);
+            xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
+            xhr.send(JSON.stringify(emailAndPassword));
+            xhr.onload = function () {
+                console.log(this.responseText);
+                sessionStorage.setItem("jwt", JSON.parse(this.responseText).accessToken);
+                if(this.status ===200){
+                    location.href = 'manage.html';
+                }
+                else{
+                    alert(this.responseText)
+                }
 
+            }
+        }
     </script>
 </body>
 

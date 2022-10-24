@@ -3,19 +3,28 @@ init();
 
 function init() {
   const url = "http://localhost:8080/api/get-employees";
+  
   const xhr = new XMLHttpRequest();
   xhr.onload = function () {
-    // console.log(this.responseText);
-    loadEmployeesHTML(JSON.parse(this.responseText));
+    console.log(this);
+    if(this.status>=200 && this.status<300){
 
+      loadEmployeesHTML(JSON.parse(this.responseText));
+    }
+    else{
+      location.href="./access-denied.html";
+    }
+    
   };
   xhr.open("GET", url);
+  xhr.setRequestHeader("Authorization","Bearer "+sessionStorage.getItem("jwt"));
   xhr.send();
 }
 
 function deleteEmployee() {
   const xhr = new XMLHttpRequest();
   xhr.open("DELETE", `http://localhost:8080/api/delete-employee/${deleteId}`);
+  xhr.setRequestHeader("Authorization","Bearer "+sessionStorage.getItem("jwt"));
   xhr.send();
   xhr.onload = function () {
     console.log(this);
@@ -69,6 +78,7 @@ theadName.addEventListener('click', (e) => {
   let sortedEmployeeData;
   const xhr = new XMLHttpRequest();
   xhr.open("GET", "http://localhost:8080/api/get-employees");
+  xhr.setRequestHeader("Authorization","Bearer "+sessionStorage.getItem("jwt"));
   xhr.send();
   xhr.onload = function () {
     if (e.target.innerHTML === "Name <sup>↑</sup>") {
@@ -87,10 +97,11 @@ theadName.addEventListener('click', (e) => {
   }
 })
 theadProject.addEventListener('click', (e) => {
-
+  
   let sortedEmployeeData;
   const xhr = new XMLHttpRequest();
   xhr.open("GET", "http://localhost:8080/api/get-employees");
+  xhr.setRequestHeader("Authorization","Bearer "+sessionStorage.getItem("jwt"));
   xhr.send();
   xhr.onload = function () {
     if (e.target.innerHTML === "project <sup>↑</sup>") {
@@ -110,34 +121,3 @@ theadProject.addEventListener('click', (e) => {
 
   }
 })
-
-let leftEye = document.querySelector(".left-eye");
-let rightEye = document.querySelector(".right-eye");
-let gokuImage = document.querySelector(".goku-image");
-let tableBlock = document.querySelector(".table-block");
-gokuImage.style.transition = ".5s ease-in"
-tableBlock.onmouseover = () => {
-  gokuImage.style.top = "2vh";
-}
-tableBlock.onmouseleave = () => {
-  gokuImage.style.top = "0vh";
-}
-document.addEventListener("mousemove", (e) => {
-  const rekt = gokuImage.getBoundingClientRect();
-  //   console.log(rekt)
-  const mouseX = e.clientX;
-  const mouseY = e.clientY;
-  const anchorX = rekt.left + rekt.width / 2;
-  const anchorY = rekt.top + rekt.height / 2;
-  const angleDeg = angle(mouseX, mouseY, anchorX, anchorY);
-  leftEye.style.transform = `rotate(${-50 + angleDeg}deg)`;
-  rightEye.style.transform = `rotate(${-50 + angleDeg}deg`;
-})
-
-function angle(cx, cy, ex, ey) {
-  const dy = ey - cy;
-  const dx = ex - cx;
-  const rad = Math.atan2(dy, dx);
-  const deg = rad * 180 / Math.PI;
-  return deg;
-}

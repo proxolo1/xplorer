@@ -206,11 +206,12 @@ body{
     let params = (new URL(document.location)).searchParams;
     const id = params.get("id");
     let employee, name, email, project, phone;
-    let url = `http://localhost:8080/get-employee/${id}`;
+    let url = `http://localhost:8080/api/get-employee/${id}`;
     init();
     function init() {
       const xhr = new XMLHttpRequest();
       xhr.open("GET", url);
+      xhr.setRequestHeader("Authorization","Bearer "+sessionStorage.getItem("jwt"));
       xhr.send();
       xhr.onload = function () {
         employee = JSON.parse(this.responseText);
@@ -238,11 +239,12 @@ body{
           return;
         }
       }
-      let url = `http://localhost:8080/update-employee/${id}`;
+      let url = `http://localhost:8080/api/update-employee/${id}`;
       employee.modified=Date();
       const xhr = new XMLHttpRequest();
       xhr.open('PUT', url, true);
-      xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
+      xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+      xhr.setRequestHeader("Authorization","Bearer "+sessionStorage.getItem("jwt"));
       xhr.send(JSON.stringify(employee));
 
       xhr.onload = function () {

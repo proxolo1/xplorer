@@ -218,14 +218,14 @@ body{
           return;
         }
       }
-      let employeeData = JSON.stringify(employee)
 
-      const url = "http://localhost:8080/add-employee"
+      const url = "http://localhost:8080/api/add-employee"
       let xhr = new XMLHttpRequest()
 
-      xhr.open('POST', url, true)
-      xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
-      xhr.send(employeeData);
+      xhr.open('POST', url, true);
+      xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+      xhr.setRequestHeader("Authorization","Bearer "+sessionStorage.getItem("jwt"));
+      xhr.send(JSON.stringify(employee));
 
       xhr.onload = function () {
           console.log(this);

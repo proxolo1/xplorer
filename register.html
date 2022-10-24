@@ -14,114 +14,118 @@
         crossorigin="anonymous"></script>
 </head>
 <style>
-    .row { margin-top:20px}
-    /* Importing fonts from Google */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
-/* Reseting */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    background: #ecf0f3;
-}
-
-.wrapper {
-    max-width: 350px;
-    min-height: 500px;
-    margin: 19px auto;
-    padding: 29px 30px 30px 30px;
-    background-color: #ecf0f3;
-    border-radius: 15px;
-    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
-}
-
-.logo {
-    width: 80px;
-    margin: auto;
-}
-
-.logo img {
-    width: 100%;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 50%;
-    box-shadow: 0px 0px 3px #5f5f5f,
-        0px 0px 0px 5px #ecf0f3,
-        8px 8px 15px #a7aaa7,
-        -8px -8px 15px #fff;
-}
-
-.wrapper .name {
-    font-weight: 600;
-    font-size: 1.4rem;
-    letter-spacing: 1.3px;
-    padding-left: 10px;
-    color: #555;
-}
-
-.wrapper .form-field input {
-    width: 100%;
-    display: block;
-    border: none;
-    outline: none;
-    background: none;
-    font-size: 1.2rem;
-    color: #666;
-    padding: 10px 15px 10px 10px;
-    /* border: 1px solid red; */
-}
-
-.wrapper .form-field {
-    padding-left: 10px;
-    margin-bottom: 20px;
-    border-radius: 20px;
-    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
-}
-
-.wrapper .form-field .fas {
-    color: #555;
-}
-
-.wrapper .btn {
-    box-shadow: none;
-    width: 100%;
-    height: 40px;
-    background-color: #03A9F4;
-    color: #fff;
-    border-radius: 25px;
-    box-shadow: 3px 3px 3px #b1b1b1,
-        -3px -3px 3px #fff;
-    letter-spacing: 1.3px;
-}
-
-.wrapper .btn:hover {
-    background-color: #039BE5;
-}
-
-.wrapper a {
-    text-decoration: none;
-    font-size: 0.8rem;
-    color: #03A9F4;
-}
-
-.wrapper a:hover {
-    color: #039BE5;
-}
-
-@media(max-width: 380px) {
-    .wrapper {
-        margin: 30px 20px;
-        padding: 40px 15px 15px 15px;
+    .row {
+        margin-top: 20px
     }
-}
+
+    /* Importing fonts from Google */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+    /* Reseting */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        background: #ecf0f3;
+    }
+
+    .wrapper {
+        max-width: 350px;
+        min-height: 500px;
+        margin: 19px auto;
+        padding: 29px 30px 30px 30px;
+        background-color: #ecf0f3;
+        border-radius: 15px;
+        box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+    }
+
+    .logo {
+        width: 80px;
+        margin: auto;
+    }
+
+    .logo img {
+        width: 100%;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0px 0px 3px #5f5f5f,
+            0px 0px 0px 5px #ecf0f3,
+            8px 8px 15px #a7aaa7,
+            -8px -8px 15px #fff;
+    }
+
+    .wrapper .name {
+        font-weight: 600;
+        font-size: 1.4rem;
+        letter-spacing: 1.3px;
+        padding-left: 10px;
+        color: #555;
+    }
+
+    .wrapper .form-field input {
+        width: 100%;
+        display: block;
+        border: none;
+        outline: none;
+        background: none;
+        font-size: 1.2rem;
+        color: #666;
+        padding: 10px 15px 10px 10px;
+        /* border: 1px solid red; */
+    }
+
+    .wrapper .form-field {
+        padding-left: 10px;
+        margin-bottom: 20px;
+        border-radius: 20px;
+        box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+    }
+
+    .wrapper .form-field .fas {
+        color: #555;
+    }
+
+    .wrapper .btn {
+        box-shadow: none;
+        width: 100%;
+        height: 40px;
+        background-color: #03A9F4;
+        color: #fff;
+        border-radius: 25px;
+        box-shadow: 3px 3px 3px #b1b1b1,
+            -3px -3px 3px #fff;
+        letter-spacing: 1.3px;
+    }
+
+    .wrapper .btn:hover {
+        background-color: #039BE5;
+    }
+
+    .wrapper a {
+        text-decoration: none;
+        font-size: 0.8rem;
+        color: #03A9F4;
+    }
+
+    .wrapper a:hover {
+        color: #039BE5;
+    }
+
+    @media(max-width: 380px) {
+        .wrapper {
+            margin: 30px 20px;
+            padding: 40px 15px 15px 15px;
+        }
+    }
 </style>
+
 <body>
-    <nav class="navbar bg-light">    
+    <nav class="navbar bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <!-- <img
@@ -131,7 +135,7 @@ body {
               height="24"
               class="d-inline-block align-text-top"
             /> -->
-            Employee mangagement
+                Employee mangagement
             </a>
             <ul class="nav navbar-nav navbar-right mx-4">
                 <li>
@@ -139,72 +143,88 @@ body {
                 </li>
             </ul>
         </div>
-        </nav>
-    
+    </nav>
 
-            <div class="container-fluid">
-        
-                <div class="row">
-               
-                        <div class="col">
-                            <div class="wrapper">
-                                <div class="logo">
-                                    <img src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/000000/external-login-web-development-flaticons-flat-flat-icons.png"/>
-                                </div>
-                                <div class="text-center mt-4 name">
-                                    Register employee
-                                </div>
-                                <div class="p-3 mt-3">
-                                    <div class="form-field d-flex align-items-center">
-                                        <span class="far fa-user"></span>
-                                        <input type="text" name="userName" id="userName" placeholder="name" title="proxolo" required>
-                                    </div>
-                                    <div class="form-field d-flex align-items-center">
-                                        <span class="fas fa-key"></span>
-                                        <input type="email" name="age" id="email" placeholder="email" required title="proxolo@gmail.com" pattern="[^@\s]+@[^@\s]+">
-                                    </div>
-                                    <div class="form-field d-flex align-items-center">
-                                        <span class="fas fa-key"></span>
-                                        <input type="date" name="age" id="dob" placeholder="dob" title="11/03/1000" min="1900-01-01" max="2000-12-30">
-                                    </div>
-                                    <div class="form-field d-flex align-items-center">
-                                        <span class="fas fa-key"></span>
-                                        <input type="password" name="age" id="password" placeholder="password" title="Password1$" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$">
-                                    </div>
-                                    <button class="btn mt-3" onclick="register()">register</button>
-                                </div>
-                                <div class="text-center fs-6">
-                                       <a href="login.html">already registered ?</a>
-                                </div>
-                            </div>
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col">
+                <div class="wrapper">
+                    <div class="logo">
+                        <img
+                            src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/000000/external-login-web-development-flaticons-flat-flat-icons.png" />
+                    </div>
+                    <div class="text-center mt-4 name">
+                        Register employee
+                    </div>
+                    <form class="p-3 mt-3" action="login.html">
+                        <div class="form-field d-flex align-items-center">
+                            <span class="far fa-user"></span>
+                            <input type="text" name="userName" id="userName" placeholder="name" title="proxolo"
+                                required>
                         </div>
+                        <div class="form-field d-flex align-items-center">
+                            <span class="fas fa-key"></span>
+                            <input type="email" name="age" id="email" placeholder="email" required
+                                title="proxolo@gmail.com" pattern="[^@\s]+@[^@\s]+">
+                        </div>
+                        <div class="form-field d-flex align-items-center">
+                            <span class="fas fa-key"></span>
+                            <input type="password" name="password" id="pwd" placeholder="password">
+                        </div>
+                        <div class="form-field d-flex align-items-center">
+                            <span class="fas fa-key"></span>
+                            <input type="password" id="confirm-password" name="age" placeholder="confirm password"
+                                title="Password1$">
+                        </div>
+                        <button class="btn mt-3" onclick="register()">register</button>
+                    </form>
+                    <div class="text-center fs-6">
+                        <a href="login.html">already registered ?</a>
                     </div>
                 </div>
             </div>
-      
-        <!-- <footer class="bg-primary">
+        </div>
+    </div>
+    </div>
+
+    <!-- <footer class="bg-primary">
             hello
         </footer> -->
-        <script>
-                function register(){
-                    let userName=document.querySelector("#userName");
-                    let email=document.querySelector("#email");
-                    let date=document.querySelector("#dob");
-                    let password=document.querySelector("#password");
-                    let userObj={
-                        name:userName.value,
-                        email:email.value,
-                        password:password.value
-                    }
-                    const xhr=new XMLHttpRequest();
-                    xhr.open("POST","http://localhost:8080/auth/register");
-                    xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
-                    xhr.send(JSON.stringify(userObj));
-                    xhr.onload=function(){
-                        console.log(this);
-                    }
+    <script>
+        let confirmPassword=document.querySelector("#confirm-password");
+       
+        function register() {
+            let loginUrl = "http://localhost:8080/auth/register"
+            let emailAndPassword = new Object({
+                name: document.getElementById("userName").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("pwd").value
+            });
+            for (let key in emailAndPassword) {
+                if (!emailAndPassword[key]) {
+                    alert(key + " required");
+                    return;
                 }
-        </script>
+            }
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", loginUrl, true);
+            xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
+            xhr.send(JSON.stringify(emailAndPassword));
+
+            xhr.onload = function () {
+                console.log(this);
+                if(this.status==200){
+                    alert(this.responseText)
+                }
+                else{
+                    alert(this.responseText)
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>
