@@ -1,87 +1,123 @@
-let employeeData;
-loadEmployeeTable();
+let deleteId;
+init();
 
-function loadEmployeeTable() {
-  let tableBody = document.querySelector("tbody");
+function init() {
+  const url = "http://localhost:8080/api/get-employees";
+  
   const xhr = new XMLHttpRequest();
   xhr.onload = function () {
-    // console.log(this.responseText);
-    employeeData = JSON.parse(this.responseText);
-    employeeData.forEach((employee) => {
-      let row = document.createElement("tr");
-      let employeeId=document.createElement("td");
-      let employeeName = document.createElement("td");
-      let employeeProject = document.createElement("td");
-      let employeePhone = document.createElement("td");
-      let action = document.createElement("td");
-      employeeId.innerHTML=`${employee.id}`;
-      employeeName.innerHTML = `${employee.name}`;
-      employeeProject.innerHTML = `${employee.project}`;
-      employeePhone.innerHTML = `${employee.phone}`;
-      action.innerHTML = `<td> 
-   <a onClick=viewEmployee(${employee.id}) data-toggle="tooltip" title="view"><img src="https://img.icons8.com/ios-glyphs/20/FFFFFF/view-file.png"/></a>
-  <a class="edit" title="Edit" data-bs-toggle="modal" data-bs-target="#employeeEdit" data-toggle="tooltip" onClick="editEmployee(${employee.id})"><img src="https://img.icons8.com/sf-black-filled/20/FFFFFF/edit.png"/></a>
-  <a onclick="deleteEmployee(${employee.id})" class="delete" title="Delete" data-toggle="tooltip"><i
-      class="material-icons"><img src="https://img.icons8.com/material-rounded/20/FFFFFF/trash.png"/></i></a></td>`;
-      row.append(employeeId);
-      row.append(employeeName);
-      row.append(employeeProject);
-      row.append(employeePhone);
-      row.append(action);
-      tableBody.append(row);
-    });
+    console.log(this);
+    if(this.status>=200 && this.status<300){
+
+      loadEmployeesHTML(JSON.parse(this.responseText));
+    }
+    else{
+      location.href="./access-denied.html";
+    }
+    
   };
-  xhr.open("GET", "./employee.json");
+  xhr.open("GET", url);
+  xhr.setRequestHeader("Authorization","Bearer "+sessionStorage.getItem("jwt"));
   xhr.send();
 }
 
-
-function addEmployee() {
-  let employee = {
-    name: "",
-    email: "",
-    project: "",
-    phone: ""
-  }
-  // let inputs = document.querySelectorAll("input");
-  let name = document.getElementById('name');
-  let email = document.getElementById('email');
-  let phone = document.getElementById('phone');
-  var project = document.querySelector("#project");
-  var option = project.options[project.selectedIndex];
-  var url = "https://api/post"
-  console.log(name.value, email.value, phone.value)
-  employee.name = name.value
-  employee.email = email.value
-  employee.project = option.value
-  employee.phone = phone.value
-
+function deleteEmployee() {
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', "http://localhost:8080/employee", true)
-  xhr.setRequestHeader('content-type', 'application/json; charset=UTF-8')
-  xhr.send(JSON.stringify(employee))
+  xhr.open("DELETE", `http://localhost:8080/api/delete-employee/${deleteId}`);
+  xhr.setRequestHeader("Authorization","Bearer "+sessionStorage.getItem("jwt"));
+  xhr.send();
   xhr.onload = function () {
-    if (xhr.status === 201) {
-      console.log('post successfully created')
-    }
+    console.log(this);
+    init();
   }
-}
-
-function deleteEmployee(id) {
-  
 }
 function editEmployee(id) {
-  console.log(id)
+  location.href = "edit-employee.html?id=" + id;
 }
-// function edit(event) {
-//   let coloum = event.path[3].cells;
-//   let editArr = [document.getElementById('edit_name'), document.getElementById('edit_project'), document.getElementById('edit_phone')]
-//   for (let i = 0; i < coloum.length - 1; i++) {
-//     console.log(coloum[i].innerText)
-//     editArr[i].value = coloum[i+1].innerText;
-//   }
+3
+function viewEmployee(id) {
+  location.href = "viewEmployee.html?id=" + id;
+}
 
-// }
-function viewEmployee(id){
-  location.href="viewEmployee.html?id="+id;
+function deleteInit(id) {
+  deleteId = id;
 }
+function loadEmployeesHTML(employeeData) {
+  let tableBody = document.querySelector("tbody");
+  tableBody.innerHTML = null;
+  employeeData.forEach((employee) => {
+
+    let row = document.createElement("tr");
+    let employeeId = document.createElement("td");
+    let employeeName = document.createElement("td");
+    let employeeProject = document.createElement("td");
+    let employeePhone = document.createElement("td");
+    let action = document.createElement("td");
+    employeeId.innerHTML = `${employee.empId}`;
+    employeeName.innerHTML = `${employee.name}`;
+    employeeProject.innerHTML = `${employee.project}`;
+    employeePhone.innerHTML = `${employee.phoneNumber}`;
+    action.innerHTML = `<td> 
+ <a onClick=viewEmployee(${employee.empId}) data-toggle="tooltip" title="view"><img src="https://img.icons8.com/ios-glyphs/20/FFFFFF/view-file.png"/></a>
+<a class="edit" title="Edit" data-toggle="tooltip" onClick="editEmployee(${employee.empId})"><img src="https://img.icons8.com/sf-black-filled/20/FFFFFF/edit.png"/></a>
+<a onclick="deleteInit(${employee.empId})" class="delete" title="Delete" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+    class="material-icons"><img src="https://img.icons8.com/material-rounded/20/FFFFFF/trash.png"/></i></a></td>`;
+    row.append(employeeId);
+    row.append(employeeName);
+    row.append(employeeProject);
+    row.append(employeePhone);
+    row.append(action);
+    tableBody.append(row);
+  });
+}
+
+const theadName = document.querySelector('.name');
+const theadProject = document.querySelector('.project');
+theadName.addEventListener('click', (e) => {
+
+  let sortedEmployeeData;
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "http://localhost:8080/api/get-employees");
+  xhr.setRequestHeader("Authorization","Bearer "+sessionStorage.getItem("jwt"));
+  xhr.send();
+  xhr.onload = function () {
+    if (e.target.innerHTML === "Name <sup>↑</sup>") {
+      e.target.innerHTML = "Name <sup>&#8595</sup>";
+      sortedEmployeeData = JSON.parse(xhr.responseText).sort((a, b) => {
+        return a.name.localeCompare(b.name)
+      });
+      loadEmployeesHTML(sortedEmployeeData);
+    } else {
+      e.target.innerHTML = "Name <sup>&#8593</sup>"
+      console.log(e.target.innerHTML)
+      loadEmployeesHTML(JSON.parse(this.responseText));
+    }
+
+
+  }
+})
+theadProject.addEventListener('click', (e) => {
+  
+  let sortedEmployeeData;
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "http://localhost:8080/api/get-employees");
+  xhr.setRequestHeader("Authorization","Bearer "+sessionStorage.getItem("jwt"));
+  xhr.send();
+  xhr.onload = function () {
+    if (e.target.innerHTML === "project <sup>↑</sup>") {
+      e.target.innerHTML = "project <sup>&#8595</sup>";
+      sortedEmployeeData = JSON.parse(xhr.responseText).sort((a, b) => {
+        return a.project.localeCompare(b.project)
+      });
+      loadEmployeesHTML(sortedEmployeeData);
+    } else {
+
+
+      e.target.innerHTML = "project <sup>&#8593</sup>"
+      console.log(e.target.innerHTML)
+      loadEmployeesHTML(JSON.parse(this.responseText));
+    }
+
+
+  }
+})

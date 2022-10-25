@@ -2,670 +2,663 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-        crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/776c2e42dc.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>View employees</title>
+  <link rel="icon" href="./icons/icons8-employee-64.png" type="image/icon type" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@200&family=Open+Sans:wght@300&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/776c2e42dc.js" crossorigin="anonymous"></script>
 </head>
 <style>
-  
-    input{
-        margin-bottom: 2vh;
-    }
-    .row {
-        margin-top: 20px
-    }
+  * {
+    font-family: system-ui;
+    overflow: hidden;
+    color: cyan;
+    font-family: 'Orbitron';
 
-    #canvas {
-        position: absolute;
-        top: 0;
-        z-index: -9999;
-        /* filter: blur(2px) */
-    }
+  }
 
-    body {
-        color: white;
-        background: #F5F7FA;
-        font-family: 'Open Sans', sans-serif;
-    }
+  body {
+    height: 100vh;
+    background: linear-gradient(0deg, black 36rem, red 53rem);
+  }
 
-    .table-wrapper {
-        /* width: 700px; */
-        margin: 30px auto;
-        background: rgba(0, 0, 0, 0.475);
-        color: white;
-        padding: 20px;
-        box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-        border-radius: 20px;
-    }
+  .nav {
+    border: 1px solid red;
+  }
 
-    .table-title {
-        padding-bottom: 10px;
-        margin: 0 0 10px;
-    }
+  input {
+    margin-bottom: 2vh;
+  }
 
-    .table-title h2 {
-        margin: 6px 0 0;
-        font-size: 22px;
-    }
+  .row {
+    margin-top: 20px;
+  }
 
-    .table-title .add-new {
-        float: right;
-        height: 30px;
-        font-weight: bold;
-        font-size: 12px;
-        text-shadow: none;
-        min-width: 100px;
-        border-radius: 50px;
-        line-height: 13px;
-    }
+  #canvas {
+    position: absolute;
+    top: 0;
+    z-index: -9999;
+    /* filter: blur(2px) */
+  }
 
-    .table-title .add-new i {
-        margin-right: 4px;
-    }
-
-    table.table {
-        table-layout: fixed;
-        color: white;
-    }
-
-    table.table tr th,
-    table.table tr td {
-        border-color: #e9e9e9;
-    }
-
-    table.table th i {
-        font-size: 13px;
-        margin: 0 5px;
-        cursor: pointer;
-    }
-
-    table.table th:last-child {
-        width: 100px;
-    }
-
-    table.table td a {
-        cursor: pointer;
-        display: inline-block;
-        margin: 0 5px;
-        min-width: 24px;
-    }
-
-    table.table td a.add {
-        color: #27C46B;
-    }
-
-    table.table td a.edit {
-        color: #FFC107;
-    }
-
-    table.table td a.delete {
-        color: #E34724;
-    }
-
-    table.table td i {
-        font-size: 19px;
-    }
-
-    table.table td a.add i {
-        font-size: 24px;
-        margin-right: -1px;
-        position: relative;
-        top: 3px;
-    }
-
-    table.table .form-control {
-        height: 32px;
-        line-height: 32px;
-        box-shadow: none;
-        border-radius: 2px;
-    }
-
-    table.table .form-control.error {
-        border-color: #f50000;
-    }
-
-    table.table td .add {
-        display: none;
-    }
-    a,li{
-        list-style: none;
-        text-decoration: none;
-        color: black;
-    }
-    @media screen and (max-width:700px){
-        .table-wrapper{
-            width: 450px;
-    margin: 30px auto;
-    background: rgba(0, 0, 0, 0.475);
+  body {
     color: white;
-    padding: 21px;
-    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
-    border-radius: 20px;
-        }
+    background: #f5f7fa;
+    font-family: "Open Sans", sans-serif;
+  }
+
+  a,
+  li {
+    list-style: none;
+    text-decoration: none;
+    /* color: black; */
+  }
+
+  body {
+    height: 100vh;
+    background: linear-gradient(180deg, black 36rem, red 53rem);
+  }
+
+  button {
+    background: black !important;
+    color: cyan !important;
+    border: none;
+    font-family: 'orbitron' !important;
+  }
+
+  .accordion-body {
+    background: black !important;
+    border: 1px solid rgb(255, 0, 0) !important;
+
+  }
+
+  .accordion-item {
+    border: none;
+  }
+
+  .name span {
+    /* text-shadow: 0px 7px 6vh rgb(255 0 0); */
+    font-size: 10vh;
+    text-transform: uppercase;
+    font-family: emoji;
+    color: #c60000;
+    font-family: 'Orbitron', sans-serif;
+    /* background: -webkit-linear-gradient(#ff0000, #ff0000); */
+    /* -webkit-background-clip: text;
+    -webkit-text-fill-color: #6b3b3b00; */
+  }
+
+  .details {
+    margin-left: 20%;
+    font-size: xx-large;
+    color: #ff0000;
+    font-weight: lighter;
+  }
+
+  a,
+  sub {
+    color: cyan;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+
+  }
+
+  sub {
+    color: #00cfcf;
+    font-size: 2vh;
+  }
+
+  .gooey {
+    background-image: linear-gradient(120deg, #34e0f0 0%, #b400ff 100%);
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+    width: 50px;
+    height: 50px;
+    animation: morph 3s linear infinite;
+    transform-style: preserve-3d;
+    outline: 1px solid transparent;
+    will-change: border-radius;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    transition: 4s ease;
+    color: black;
+    text-align: center;
+    cursor: grab;
+  }
+
+  .gooey:before,
+  .gooey:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+    box-shadow: 5px 5px 89px rgba(0, 102, 255, 0.21);
+    will-change: border-radius, transform, opacity;
+    animation-delay: 200ms;
+    /* background-image: linear-gradient(
+        120deg,
+        rgba(0, 67, 255, 0.55) 0%,
+        rgba(0, 103, 255, 0.89) 100%
+      ); */
+  }
+
+  .gooey:before {
+    animation: morph 3s linear infinite;
+    opacity: 0.21;
+    animation-duration: 1.5s;
+    background-image: linear-gradient(120deg, #e1e428 0%, #af9c12 100%);
+  }
+
+  .gooey:after {
+    animation: morph 3s linear infinite;
+    animation-delay: 400ms;
+    opacity: 0.89;
+    line-height: 120px;
+    text-indent: -21px;
+    /* background-image: linear-gradient(120deg, #c30808 0%, #ff0000 100%); */
+    background-image: var(--bgcolor);
+  }
+
+  @keyframes morph {
+
+    0%,
+    100% {
+      border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+      transform: translate3d(0, 0, 0) rotateZ(0.01deg);
     }
+
+    34% {
+      border-radius: 70% 30% 46% 54% / 30% 29% 71% 70%;
+      transform: translate3d(0, 5px, 0) rotateZ(0.01deg);
+    }
+
+    50% {
+      opacity: 0.89;
+      transform: translate3d(0, 0, 0) rotateZ(0.01deg);
+    }
+
+    67% {
+      border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+      transform: translate3d(0, -3px, 0) rotateZ(0.01deg);
+    }
+  }
+
+  @keyframes fadeIn {
+    100% {
+      transform: scale(1.03);
+      opacity: 0;
+    }
+  }
+
+  .flicker-4 {
+    -webkit-animation: flicker-4 10s linear infinite both;
+    animation: flicker-4 10s linear infinite both;
+  }
+
+  /* ----------------------------------------------
+ * Generated by Animista on 2022-10-23 13:48:32
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+  /**
+ * ----------------------------------------
+ * animation flicker-4
+ * ----------------------------------------
+ */
+  @-webkit-keyframes flicker-4 {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    31.98% {
+      opacity: 1;
+    }
+
+    32% {
+      opacity: 0;
+    }
+
+    32.8% {
+      opacity: 0;
+    }
+
+    32.82% {
+      opacity: 1;
+    }
+
+    34.98% {
+      opacity: 1;
+    }
+
+    35% {
+      opacity: 0;
+    }
+
+    35.7% {
+      opacity: 0;
+    }
+
+    35.72% {
+      opacity: 1;
+    }
+
+    36.98% {
+      opacity: 1;
+    }
+
+    37% {
+      opacity: 0;
+    }
+
+    37.6% {
+      opacity: 0;
+    }
+
+    37.62% {
+      opacity: 1;
+    }
+
+    67.98% {
+      opacity: 1;
+    }
+
+    68% {
+      opacity: 0;
+    }
+
+    68.4% {
+      opacity: 0;
+    }
+
+    68.42% {
+      opacity: 1;
+    }
+
+    95.98% {
+      opacity: 1;
+    }
+
+    96% {
+      opacity: 0;
+    }
+
+    96.7% {
+      opacity: 0;
+    }
+
+    96.72% {
+      opacity: 1;
+    }
+
+    98.98% {
+      opacity: 1;
+    }
+
+    99% {
+      opacity: 0;
+    }
+
+    99.6% {
+      opacity: 0;
+    }
+
+    99.62% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes flicker-4 {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    31.98% {
+      opacity: 1;
+    }
+
+    32% {
+      opacity: 0;
+    }
+
+    32.8% {
+      opacity: 0;
+    }
+
+    32.82% {
+      opacity: 1;
+    }
+
+    34.98% {
+      opacity: 1;
+    }
+
+    35% {
+      opacity: 0;
+    }
+
+    35.7% {
+      opacity: 0;
+    }
+
+    35.72% {
+      opacity: 1;
+    }
+
+    36.98% {
+      opacity: 1;
+    }
+
+    37% {
+      opacity: 0;
+    }
+
+    37.6% {
+      opacity: 0;
+    }
+
+    37.62% {
+      opacity: 1;
+    }
+
+    67.98% {
+      opacity: 1;
+    }
+
+    68% {
+      opacity: 0;
+    }
+
+    68.4% {
+      opacity: 0;
+    }
+
+    68.42% {
+      opacity: 1;
+    }
+
+    95.98% {
+      opacity: 1;
+    }
+
+    96% {
+      opacity: 0;
+    }
+
+    96.7% {
+      opacity: 0;
+    }
+
+    96.72% {
+      opacity: 1;
+    }
+
+    98.98% {
+      opacity: 1;
+    }
+
+    99% {
+      opacity: 0;
+    }
+
+    99.6% {
+      opacity: 0;
+    }
+
+    99.62% {
+      opacity: 1;
+    }
+  }
 </style>
 
 <body>
-    <canvas id="canvas"></canvas>
-    <nav class="navbar bg-transparent">
-        <div class="container-fluid">
-            <a class="navbar-brand text-white" href="#">
-                <!-- <img
+  <nav class="navbar bg-transparent">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="#">
+        <!-- <img
                     src="../icons/bootstrap-logo.svg"
                     alt=""
                     width="30"
                     height="24"
                     class="d-inline-block align-text-top"
                     /> -->
-                    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&width=435&lines=HELLO!;Employee+management+system" alt="Typing SVG" />
-                </a>
-                <ul class="nav navbar-nav navbar-right mx-4">
-                    <li>
-                        <a class="btn btn-outline-light" href="login.html"><span class="glyphicon glyphicon-log-in">Login
-                            out</span> </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>  
-            <div class="container-fluid">
-                
-                <div class="row">
-                    <div class="col-md-3 vh-100 bg-light">
-                        <div class="row">
-                            <div class="accordion" id="accordionPanelsStayOpenExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                        <button
-                                        class="accordion-button"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseOne"
-                                        aria-expanded="true"
-                                        aria-controls="panelsStayOpen-collapseOne"
-                                        >
-                                        Home
-                                    </button>
-                                </h2>
-                                <div
-                                id="panelsStayOpen-collapseOne"
-                                class="accordion-collapse collapse"
-                                aria-labelledby="panelsStayOpen-headingOne"
-                                >
-                                <div class="accordion-body">
-                                    <ul>
-                                        <li>
-                                            <a href="dashboard.html">Dashboard</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="accordion" id="accordionPanelsStayOpenExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                            <button
-                            class="accordion-button"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapseOne"
-                            aria-expanded="true"
-                            aria-controls="panelsStayOpen-collapseOne"
-                            >
-                            Employee Module
-                        </button>
-                    </h2>
-                    <div
-                    id="panelsStayOpen-collapseOne"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="panelsStayOpen-headingOne"
-                    >
-                    <div class="accordion-body">
-                        <ul>
-                            <li>
-                                <a href="manage.html">View employees</a>
-                            </li>
-                            <!-- <li>
-                                <a href="">add/edit</a> 
-                            </li> -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <img
+          src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&width=435&lines=HELLO!;Employee+management+system"
+          alt="Typing SVG" />
+      </a>
+      <ul class="nav navbar-nav navbar-right mx-4">
+        <li>
+          <a class="btn" href="login.html"><span class="glyphicon glyphicon-log-in">Login out</span>
+          </a>
+        </li>
+      </ul>
     </div>
+  </nav>
+  <div class="container-fluid">
     <div class="row">
-        <div class="accordion" id="accordionPanelsStayOpenExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <button
-                    class="accordion-button"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#panelsStayOpen-collapseOne"
-                    aria-expanded="true"
-                    aria-controls="panelsStayOpen-collapseOne"
-                    >
-                    Project
-                </button>
-            </h2>
-            <div
-            id="panelsStayOpen-collapseOne"
-            class="accordion-collapse collapse"
-            aria-labelledby="panelsStayOpen-headingOne"
-                      >
-                      <div class="accordion-body">
-                          <ul>
-                              <li>
-                                  <a href="project.html">Project Details</a>
-                                  
-                                </li>
-                                <!-- <li>
-                                    <a href="">add/edit</a> 
-                                </li> -->
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <div class="col-md-3">
         <div class="row">
-            <div class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                        <button
-                        class="accordion-button"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#panelsStayOpen-collapseOne"
-                        aria-expanded="true"
-                        aria-controls="panelsStayOpen-collapseOne"
-                        >
-                        Report
-                    </button>
-                </h2>
-                <div
-                id="panelsStayOpen-collapseOne"
-                class="accordion-collapse collapse"
-                aria-labelledby="panelsStayOpen-headingOne"
-                >
+          <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                  aria-controls="panelsStayOpen-collapseOne">
+                  Home
+                </button>
+              </h2>
+              <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
+                aria-labelledby="panelsStayOpen-headingOne">
                 <div class="accordion-body">
-                    <ul>
-                        <li>
-                            <a href="manage.html"></a>
-                        </li>
-                        <!-- <li>
-                            <a href="">add/edit</a> 
-                        </li> -->
-                    </ul>
+                  <ul>
+                    <li>
+                      <a href="dashboard.html">Dashboard</a>
+                    </li>
+                  </ul>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
-</div>
-</div>
-<div class="col-md-9">
-    <div class="container">
-        <div class="table-wrapper col bg-dark">
-            <div class="table-title">
-                <div class="row">
-                    <div class="col-sm-8">
-                        <h2>Employee <b>Details</b></h2>
-                    </div>
-                    <div class="col-sm-4">
-                        <button type="button" class="btn btn-outline-light add-new" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-plus"></i> Add
-                            New</button>
-                        </div>
-                    </div>
-                </div>
-                <table class="table table-bordered text-capitalize">
-                    <thead>
-                        <tr>
-                            <th>Id  </th>
-                            <th>Name</th>
-                            <th>email</th>
-                            <th>project</th>
-                            <th>Phone</th>
-                           
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- <tr>
-                            <td>John Doe</td>
-                            <td>Administration</td>
-                            <td>9895774705</td>
-                            <td>
-                                <a class="add" title="Add" data-toggle="tooltip"><i
-                                    class="material-icons">&#xE03B;</i></a>
-                                    <a class="edit" title="Edit" data-toggle="tooltip"><i
-                                        class="material-icons">&#xE254;</i></a>
-                                        <a  class="delete" title="Delete" data-toggle="tooltip"><i
-                                            class="material-icons">&#xE872;</i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Peter Parker</td>
-                                        <td>Customer Service</td>
-                                        <td>8784856820</td>
-                                        <td>
-                                            <a class="add" title="Add" data-toggle="tooltip"><i
-                                                class="material-icons">&#xE03B;</i></a>
-                                                <a class="edit" title="Edit" data-toggle="tooltip"><i
-                                                    class="material-icons">&#xE254;</i></a>
-                                                    <a class="delete" title="Delete" data-toggle="tooltip"><i
-                                                        class="material-icons">&#xE872;</i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Fran Wilson</td>
-                                                    <td>Human Resources</td>
-                                                    <td>7569851546</td>
-                                                    <td>
-                                                        <a class="add" title="Add" data-toggle="tooltip"><i
-                                                            class="material-icons">&#xE03B;</i></a>
-                                                            <a class="edit" title="Edit" data-toggle="tooltip"><i
-                                                                class="material-icons">&#xE254;</i></a>
-                                                                <a class="delete" title="Delete" data-toggle="tooltip"><i
-                                                                    class="material-icons">&#xE872;</i></a>
-                                                                </td>
-                                                            </tr> -->
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class=" text-dark modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-primary" id="exampleModalLabel">Add employee</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="container">
-            <form id="contact" action="" method="post">
-                <fieldset>
-                  <input id='name'
-                    placeholder="Name"
-                    type="text"
-                    tabindex="1"
-                    required
-                    autofocus
-                  />
-                </fieldset>
-                <fieldset>
-                  <input id='email'
-                    placeholder=" Email Address"
-                    type="email"
-                    tabindex="2"
-                    required
-                  />
-                </fieldset>
-                <fieldset>
-                  <input id='phone'
-                    placeholder=" Phone Number"
-                    type="tel"
-                    tabindex="3"
-                    required
-                  />
-                </fieldset>
-                <fieldset>
-                    <label for="">Projects :</label>
-                  <select class="btn"name="projects" id="project" >
-                      <option value="delivery">delivery</option>
-                      <option value="boots">boots</option>
-                  </select>
-                </fieldset>
-                <fieldset>
-                  <!-- <textarea
-                    placeholder="Type your Message Here...."
-                    tabindex="5"
-                    required
-                  ></textarea>
-                </fieldset> -->
-                <!-- <fieldset>
-                  <button
-                    name="submit"
-                    type="submit"
-                    id="contact-submit"
-                    data-submit="...Sending"
-                  >
-                    Submit
-                  </button>
-                </fieldset> -->
-              </form>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="addEmployee(event)">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Button trigger modal -->
-
-  
-  <!-- Modal -->
-  <div class="modal fade" id="employeeEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-info text-center" id="exampleModalLabel">Edit Employee</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="container">
-                <form id="contact" action="" method="post">
-                    <fieldset>
-                      <input id='edit_name'
-                        placeholder="Name"
-                        type="text"
-                        tabindex="1"
-                        required
-                        autofocus
-                      />
-                    </fieldset>
-                    <!-- <fieldset>
-                      <input id='email'
-                        placeholder=" Email Address"
-                        type="email"
-                        tabindex="2"
-                        required
-                      />
-                    </fieldset> -->
-                    <fieldset>
-                      <input id='edit_phone'
-                        placeholder=" Phone Number"
-                        type="tel"
-                        tabindex="3"
-                        required
-                      />
-                    </fieldset>
-                    <fieldset>
-                        <label class="text-dark" for="">Projects :</label>
-                      <select class="btn btn-outline-dark"name="projects" id="edit_project" >
-                          <option value="delivery">delivery</option>
-                          <option value="boots">boots</option>
-                      </select>
-                    </fieldset>
-                    <fieldset>
-                      <!-- <textarea
-                        placeholder="Type your Message Here...."
-                        tabindex="5"
-                        required
-                      ></textarea>
-                    </fieldset> -->
-                    <!-- <fieldset>
-                      <button
-                        name="submit"
-                        type="submit"
-                        id="contact-submit"
-                        data-submit="...Sending"
-                      >
-                        Submit
-                      </button>
-                    </fieldset> -->
-                  </form>
+        <div class="row">
+          <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapseOne1" aria-expanded="true"
+                  aria-controls="panelsStayOpen-collapseOne">
+                  Employee Module
+                </button>
+              </h2>
+              <div id="panelsStayOpen-collapseOne1" class="accordion-collapse collapse"
+                aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                  <ul>
+                    <li>
+                      <a href="manage.html">View employees</a>
+                    </li>
+                    <!-- <li>
+                                <a href="">add/edit</a> 
+                            </li> -->
+                  </ul>
+                </div>
               </div>
+            </div>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="editEmployee()" data-bs-dismiss="modal">Save changes</button>
+        <div class="row">
+          <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapseOne2" aria-expanded="true"
+                  aria-controls="panelsStayOpen-collapseOne">
+                  Project
+                </button>
+              </h2>
+              <div id="panelsStayOpen-collapseOne2" class="accordion-collapse collapse"
+                aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                  <ul>
+                    <li>
+                      <a href="project.html">Project Details</a>
+                    </li>
+                    <!-- <li>
+                                    <a href="">add/edit</a> 
+                                </li> -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapseOne3" aria-expanded="true"
+                  aria-controls="panelsStayOpen-collapseOne">
+                  Report
+                </button>
+              </h2>
+              <div id="panelsStayOpen-collapseOne3" class="accordion-collapse collapse"
+                aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                  <ul>
+                    <li>
+                      <a href="manage.html"></a>
+                    </li>
+                    <!-- <li>
+                            <a href="">add/edit</a> 
+                        </li> -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="modal fade" id="viewmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-<script>
-    let canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    let stars = [];
-    let backgroundCanvas = "black";
-    
-    let str = ""
-    let keyCode = [];
-    document.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    })
-    function star() {
+      <div class="col-md-9">
+        <div class="container my-3 text-center">
+          <div class="name row">
+            <span class="flicker-4"></span>
+          </div>
+          <div class="details text-start">
+            <div class="email row">
+              <span>Email : <a></a></span>
+            </div>
+            <div class="project row">
+              <span>Project : <a></a></span>
+            </div>
+            <div class="phone row">
+              <span>Number : <a></a></span>
+            </div>
+            <div class="modified">
+              <sub class="">Modified : </sub>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="gooey"></div>
+
+  <script>
+    let name = document.querySelector(".name span");
+    let email = document.querySelector(".email span a");
+    let project = document.querySelector(".project span a");
+    let phone = document.querySelector(".phone span a");
+    let modified = document.querySelector(".modified sub");
+    let gooey = document.querySelector(".gooey");
+    gooey.style.setProperty("--bgcolor","linear-gradient(120deg, #c30808 0%, #ff0000 100%)");
+    let toggle = false;
+    let params = new URL(document.location).searchParams;
+    const id = params.get("id");
+    const xhr = new XMLHttpRequest();
+    let employee;
+    xhr.open("GET", `http://localhost:8080/api/get-employee/${id}`);
+    xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem("jwt"));
+    xhr.send();
+    xhr.onload = function () {
+      console.log(this);
+      employee = JSON.parse(this.responseText);
+      name.innerHTML = employee.name;
+      email.innerHTML = employee.email;
+      phone.innerHTML = employee.phoneNumber;
+      project.innerHTML = employee.project;
+      modified.innerHTML += employee.modified;
+      email.href = `mailto:${employee.email}`;
+      project.href = `https://www.google.com/search?q=${employee.project}`;
+      phone.href = `tel:${employee.phoneNumber}`;
+    };
+    gooey.onmouseover = function () {
+
+      //  let myWindow= window.open("https://www.proxolo.tk","_blank","width=700,height=200");
+      //  myWindow.document.write(JSON.stringify(employee))
+      if (toggle) {
+
+        gooey.style.right = `10%`;
+        name.style.color = "red";
+        document.querySelectorAll("a,sub").forEach(tag => {
+          tag.style.color = "cyan";
+        });
+        document.querySelectorAll("span:not(:first-child)").forEach(tag => {
+          tag.style.color = "red";
+        });
+        document.body.style.background = `linear-gradient(180deg, black 36rem, red 53rem)`;
+        document.querySelectorAll("button").forEach(value => {
+          value.style.border = " 1px solid red !important";
+        });
+        gooey.style.setProperty("--bgcolor","linear-gradient(120deg, #c30808 0%, #ff0000 100%)");
+      }
+      else {
+        gooey.style.right = "90%";
+
+        name.style.color = "blue";
+        document.querySelectorAll("a,sub").forEach(tag => {
+          tag.style.color = "yellow";
+        });
+        document.querySelectorAll("span:not(:first-child)").forEach(tag => {
+          tag.style.color = "yellow";
+        });
+        document.body.style.background = `linear-gradient(180deg, black 36rem, #020074 53rem)`;
+        document.querySelectorAll("button").forEach(value => {
+          value.style.border = " 1px solid blue !important";
+        })}
+        gooey.style.setProperty("--bgcolor","linear-gradient(120deg, #1a029f 0%, #0018ff 100%)");
         
-        this.x = Math.floor(Math.random() * canvas.width);
-        this.y = Math.floor(Math.random() * canvas.height);
-        this.raidus = Math.floor(Math.random() * 4);
-        this.vx = Math.floor(Math.random() * 10);
-            this.vy = 1;
-            this.color =`rgba(255,255,255,.5)`;
-            this.direction=Math.PI*.5;
-        };
-        let countStars = 2000;
-       
-        function createStars() {
-            for (let i = 0; i < countStars; i++) {
-                stars.push(new star());
-            }
+      }
+      gooey.onmouseleave = function () {
+        toggle = !toggle;
+      }
 
-        }
-        createStars();
-        function drawStars() {
-            // console.log("hello")
 
-            ctx.fillStyle = backgroundCanvas;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            stars.forEach(star => {
-                ctx.fillStyle = star.color;
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.raidus, 0,  star.direction);
-                // star.moveStars();
-                ctx.fill();
-                if (star.x > canvas.width) {
-                    star.x = 0;
-                }
-                if (star.y > canvas.height) {
-                    star.y = 0;
-                }
-                if(star.y<0){
-                    star.y=canvas.height;
-                }
-                star.x += star.vx/2;
-                star.y +=star.vy;
-            })
-        }
-        setInterval(drawStars, 20);
-        // document.addEventListener("keydown", (event) => {
-        //    str+=event.key;
-        // //    event.preventDefault();
-        //    if(event.code=="Space") {
-        //     backgroundCanvas="#0B5269";
-        //     stars.forEach(star =>
-        //     star.color="black")
-        //     str="";
-        //     // alert("dark mode activated")
-        //    }
-        //    else if(event.altKey) {
-        //     backgroundCanvas="black";
-        //     stars.forEach(star =>
-        //     star.color="white")
-        //     str="";
-        //    }
 
-        // })
-        document.addEventListener('resize',()=>{
-            console.log("hello")
-            canvas.width=window.innerWidth;
-            canvas.height= window.innerHeight;
-        })
-    </script>
-    <script>
-        let params = (new URL(document.location)).searchParams;
-        let tableBody = document.querySelector("tbody");
-        console.log(params)
-        const id=params.get("id");
-        console.log(id)
-        const xhr=new XMLHttpRequest();
-        xhr.open("GET","./employee.json");
-        xhr.send();
-        xhr.onload=function(){
-            let employeeData=JSON.parse(this.responseText);
-            employeeData.forEach(employee=>{
-                if(employee.id==id){
-                    let row = document.createElement("tr");
-      let employeeId=document.createElement("td");
-      let employeeName = document.createElement("td");
-      let employeeProject = document.createElement("td");
-      let employeePhone = document.createElement("td");
-    
-      let email=document.createElement("td")
-      employeeId.innerHTML=`${employee.id}`;
-      employeeName.innerHTML = `${employee.name}`;
-      employeeProject.innerHTML = `${employee.project}`;
-      employeePhone.innerHTML = `${employee.phone}`;
-      email.innerHTML=`${employee.email} `
-   
-      row.append(employeeId);
-      row.append(employeeName);
-      row.append(email)
-      row.append(employeeProject);
-      row.append(employeePhone);
-     
-      tableBody.append(row);
-                }
-            })
-        }
-    </script>
+
+      function random(MAX_VALUE) {
+        return Math.floor(Math.random() * MAX_VALUE);
+      }
+  </script>
 </body>
 
 </html>

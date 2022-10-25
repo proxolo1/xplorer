@@ -13,91 +13,99 @@
         crossorigin="anonymous"></script>
 </head>
 <style>
-    .row { margin-top:20px}
+    *{
+        overflow: hidden;
+    }
+    #canvas {
+      position: absolute;
+      top: 0;
+      z-index: -9999;
+      /* filter: blur(2px) */
+    }
+   
+    img{
+        height: 40em;
+    }
 </style>
 <body>
-    <nav class="navbar bg-light">    
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <!-- <img
-              src="../icons/bootstrap-logo.svg"
-              alt=""
-              width="30"
-              height="24"
-              class="d-inline-block align-text-top"
-            /> -->
-            <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&width=435&lines=HELLO!;Employee+management+system" alt="Typing SVG" />
-            </a>
-            <ul class="nav navbar-nav navbar-right mx-4">
-                <li>
-                    <a class="btn btn-primary" href="login.html"><span class="glyphicon glyphicon-log-in">Login</span> </a>
-                </li>
-            </ul>
-        </div>
-        </nav>
-    <div class="container-fluid">
-
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
-    
-    
-                    <div class="accordion" id="accordionPanelsStayOpenExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                    aria-controls="panelsStayOpen-collapseOne">
-                                    <a href="dashboard.html">Dashboard</a>
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse "
-                                aria-labelledby="panelsStayOpen-headingOne">
-                                <div class="accordion-body">
-                                
-                                    <a href="dashboard.html">Dashboard</a>
-                               
-                                </div>
-                            </div>
-                        </div>
-    
-                    </div></div>
-                    <div class="row">
-    
-                        <div class="accordion" id="accordionPanelsStayOpenExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                        aria-controls="panelsStayOpen-collapseOne">
-                                       Manage Employee
-                                    </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse "
-                                    aria-labelledby="panelsStayOpen-headingOne">
-                                    <div class="accordion-body">
-                                        <ul>
-                                            <li>
-                                               <a href="manage.html">view employees</a> 
-                                            </li>
-                                            <!-- <li>
-                                                <a href="">add/edit</a> 
-                                             </li> -->
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-    
-                        </div>
-                    </div>
-    
-                </div>
-            </div>
-            <div class="col-9">
-                
-            </div>
-        </div>
+  <canvas id="canvas"></canvas>
+    <div class="intro">
+        <img
+        src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&width=435&lines=HELLO!;"
+        alt="Typing SVG" />
     </div>
+        <script>
+            let canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      let stars = [];
+      // stars.push({
+      //     x:canvas.width/2,
+      //     y:canvas.height/2,
+      //     raidus:40,
+      //     vx:0,
+      //     vy:0,
+      //     color:"red"
+      // })
+      document.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+      function star() {
+        this.x = Math.floor(Math.random() * canvas.width);
+        this.y = Math.floor(Math.random() * canvas.height);
+        this.raidus = Math.floor(Math.random() * 3);
+        this.vx = Math.floor(Math.random() * 10);
+        this.vy = 2;
+        this.color = `rgba(${Math.floor(Math.random() * 255)},${Math.floor(
+          Math.random() * 255
+        )},${Math.floor(Math.random() * 255)},${Math.floor(
+          Math.random() * 255
+        )})`;
+      }
+      let countStars = 2000;
+      // stars.push({
+      //     x:0,
+      //     y:canvas.height,
+      //     raidus:10,
+      //     vx:3,
+      //     vy:-2,
+      //     color:"rgba(255,255,255,.3)"
+      // })
+      function createStars() {
+        for (let i = 0; i < countStars; i++) {
+          stars.push(new star());
+        }
+      }
+      createStars();
+      function drawStars() {
+        // console.log("hello")
+
+        ctx.fillStyle = `rgba(0,0,0,.8)`;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        stars.forEach((star) => {
+          ctx.fillStyle = star.color;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.raidus, 0, 2 * Math.PI, true);
+          // star.moveStars();
+          ctx.fill();
+          if (star.x > canvas.width) {
+            star.x = 0;
+          }
+          if (star.y > canvas.height) {
+            star.y = 0;
+          }
+          star.x += star.vx / 2;
+          star.y += star.vy / 2;
+        });
+      }
+      setInterval(drawStars, 20); 
+      setTimeout(()=>{
+        location.href="./manage.html";
+      },2000);
+        </script>
 </body>
 
 </html>
