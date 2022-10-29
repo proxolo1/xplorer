@@ -193,6 +193,10 @@ body{
            <option value="NODE JS">NODE JS</option>
            <option value="DOT NET">DOT NET</option>
          </select>
+         <label for="allocation">Project Allocation</label>
+         <input type="text" name="" id="allocation" placeholder="enter allocation place" disabled class="bg-light">
+         <label for="duration">Project Duration</label>
+         <input type="text" name="" id="duration" placeholder="enter project duration" disabled class="bg-light">
          <button type="submit" class="btn btn-outline-dark" onclick="updateEmployee()">submit</button>
          </form>
         
@@ -205,7 +209,7 @@ body{
   <script>
     let params = (new URL(document.location)).searchParams;
     const id = params.get("id");
-    let employee, name, email, project, phone;
+    let employee, name, email, project, phone,allocation,duration;
     let url = `http://localhost:8080/api/get-employee/${id}`;
     init();
     function init() {
@@ -219,10 +223,14 @@ body{
         email = document.getElementById("email");
         project = document.getElementById("project");
         phone = document.getElementById("phone");
+        allocation=document.getElementById("allocation");
+        duration=document.getElementById("duration");
         name.value = employee.name;
         email.value = employee.email;
-        project.value = employee.project
+        project.value = employee.projectModel.projectName;
         phone.value = employee.phoneNumber;
+        duration.value=employee.projectModel.duration;
+        allocation.value=employee.projectModel.allocation;
       }
     }
 
@@ -230,7 +238,11 @@ body{
       let employee = new Object({
         name: name.value,
         email: email.value,
-        project: project.value,
+        projectModel:new Object({
+          projectName:project.value,
+          allocation:allocation.value,
+          duration:duration.value
+        }),
         phoneNumber: phone.value
       });
       for(key in employee) {

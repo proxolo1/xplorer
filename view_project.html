@@ -555,13 +555,13 @@
           </div>
           <div class="details text-start">
             <div class="email row">
-              <span>Email : <a></a></span>
+              <span>Allocation : <a></a></span>
             </div>
             <div class="project row">
-              <span>Project : <a></a></span>
+              <span>Duration : <a></a></span>
             </div>
             <div class="phone row">
-              <span>Number : <a></a></span>
+              <span>Employees : <a></a></span>
             </div>
             <div class="modified">
               <sub class="">Modified : </sub>
@@ -581,23 +581,24 @@
     let modified = document.querySelector(".modified sub");
     let gooey = document.querySelector(".gooey");
     let params = new URL(document.location).searchParams;
-    const id = params.get("id");
+    const projectName = params.get("name");
     const xhr = new XMLHttpRequest();
-    let employee;
-    xhr.open("GET", `http://localhost:8080/api/get-employee/${id}`);
+    let projects;
+    xhr.open("GET", `http://localhost:8080/api/get-project-employee/`+projectName);
     xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem("jwt"));
     xhr.send();
     xhr.onload = function () {
-      console.log(this);
-      employee = JSON.parse(this.responseText);
-      name.innerHTML = employee.name;
-      email.innerHTML = employee.email;
-      phone.innerHTML = employee.phoneNumber;
-      project.innerHTML = employee.projectModel.projectName;
-      modified.innerHTML += employee.modified;
-      email.href = `mailto:${employee.email}`;
-      project.href = `https://www.google.com/search?q=${employee.projectModel.projectName}`;
-      phone.href = `tel:${employee.phoneNumber}`;
+      projects = JSON.parse(this.responseText);
+      projects.forEach(project=>{
+          console.log(project.name)
+           name.innerHTML = project.projectModel.projectName;
+      email.innerHTML = project.projectModel.allocation;
+      phone.innerHTML = project.projectModel.duration;
+      project.innerHTML = project.name;
+      modified.innerHTML += project.modified;
+      })
+     
+     
     };
     gooey.onmouseover = function () {
 
