@@ -55,7 +55,7 @@ function loadEmployeesHTML(employeeData) {
     let action = document.createElement("td");
     employeeId.innerHTML = `${employee.empId}`;
     employeeName.innerHTML = `${employee.name}`;
-    employeeProject.innerHTML = `${employee.project}`;
+    employeeProject.innerHTML = `${employee.projectModel.projectName}`;
     employeePhone.innerHTML = `${employee.phoneNumber}`;
     action.innerHTML = `<td> 
  <a onClick=viewEmployee(${employee.empId}) data-toggle="tooltip" title="view"><img src="https://img.icons8.com/ios-glyphs/20/FFFFFF/view-file.png"/></a>
@@ -107,7 +107,7 @@ theadProject.addEventListener('click', (e) => {
     if (e.target.innerHTML === "project <sup>↑</sup>") {
       e.target.innerHTML = "project <sup>&#8595</sup>";
       sortedEmployeeData = JSON.parse(xhr.responseText).sort((a, b) => {
-        return a.project.localeCompare(b.project)
+        return a.projectModel.projectName.localeCompare(b.projectModel.projectName)
       });
       loadEmployeesHTML(sortedEmployeeData);
     } else {

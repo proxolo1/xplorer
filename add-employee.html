@@ -19,29 +19,44 @@
   .row {
     margin-top: 20px;
   }
-  input, select,form button {
-  width: 100%; /* Full width */
-  padding: 12px; /* Some padding */ 
-  border: 1px solid #ccc; /* Gray border */
-  border-radius: 4px; /* Rounded borders */
-  box-sizing: border-box; /* Make sure that padding and width stays in place */
-  margin-top: 6px; /* Add a top margin */
-  margin-bottom: 16px; /* Bottom margin */
-  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
-}
-form button{
-  color: white !important;
+
+  input,
+  select,
+  form button {
+    width: 100%;
+    /* Full width */
+    padding: 12px;
+    /* Some padding */
+    border: 1px solid #ccc;
+    /* Gray border */
+    border-radius: 4px;
+    /* Rounded borders */
+    box-sizing: border-box;
+    /* Make sure that padding and width stays in place */
+    margin-top: 6px;
+    /* Add a top margin */
+    margin-bottom: 16px;
+    /* Bottom margin */
+    resize: vertical
+      /* Allow the user to vertically resize the textarea (not horizontally) */
+  }
+
+  form button {
+    color: white !important;
     border: 1px solid !important;
-}
-li,a{
-  list-style: none;
-  text-decoration: none;
-  color: black;
-}
-body{
-  background:black;
-  color:white;
-}
+  }
+
+  li,
+  a {
+    list-style: none;
+    text-decoration: none;
+    color: black;
+  }
+
+  body {
+    background: black;
+    color: white;
+  }
 </style>
 
 <body>
@@ -178,22 +193,26 @@ body{
       <div class="col-md-9">
         <div class="container">
           <form action="manage.html">
-             <label for="name">Name<sup class="text-danger">*</sup></label>
-          <input type="text" name="" id="name" placeholder="enter full name" required>
-          <label for="email">Email<sup class="text-danger">*</sup></label>
-          <input type="email" name="" id="email" placeholder="enter email" required>
-          <label for="phone">Phone number<sup class="text-danger">*</sup></label>
-          <input type="tel" name="" id="phone" placeholder="enter phone number" required>
-          <label for="project">projects<sup class="text-danger">*</sup></label>
-          <select name="" id="project">
-            <option value="JAVA">JAVA</option>
-            <option value="PYTHON">PYTHON</option>
-            <option value="NODE JS">NODE JS</option>
-            <option value="DOT NET">DOT NET</option>
-          </select>
-          <button type="submit" class="btn btn-outline-dark" onclick="employeeData()">submit</button>
+            <label for="name">Name<sup class="text-danger">*</sup></label>
+            <input type="text" name="" id="name" placeholder="enter full name" required>
+            <label for="email">Email<sup class="text-danger">*</sup></label>
+            <input type="email" name="" id="email" placeholder="enter email" required>
+            <label for="phone">Phone number<sup class="text-danger">*</sup></label>
+            <input type="tel" name="" id="phone" placeholder="enter phone number" required>
+            <label for="project">projects<sup class="text-danger">*</sup></label>
+            <select name="" id="project">
+              <option value="java">JAVA</option>
+              <option value="python">PYTHON</option>
+              <option value="node js">NODE JS</option>
+              <option value="dot net">DOT NET</option>
+            </select>
+            <label for="allocation">Project Allocation</label>
+            <input type="text" name="" id="allocation" placeholder="enter allocation place" >
+            <label for="duration">Project Duration</label>
+            <input type="number" name="" id="duration" placeholder="enter project duration" >
+            <button type="submit" class="btn btn-outline-dark" onclick="employeeData()">submit</button>
           </form>
-         
+
 
         </div>
       </div>
@@ -205,30 +224,36 @@ body{
       let eEmail = document.querySelector('#email');
       let ePhone = document.querySelector('#phone');
       let project = document.querySelector('#project');
+      let allocation = document.querySelector("#allocation");
+      let duration = document.querySelector("#duration");
       let option = project.selectedIndex;
 
       let employee = new Object({
         name: eName.value,
         email: eEmail.value,
         phoneNumber: ePhone.value,
-        project: project.options[option].text
+        projectModel: new Object({
+          projectName: project.options[option].text,
+          allocation: allocation.value,
+          duration: duration.value
+        })
       })
-      for(let key in employee){
-        if(!employee[key]){
+      for (let key in employee) {
+        if (!employee[key]) {
           return;
         }
       }
 
       const url = "http://localhost:8080/api/add-employee"
       let xhr = new XMLHttpRequest()
-
+      console.log(employee)
       xhr.open('POST', url, true);
       xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
-      xhr.setRequestHeader("Authorization","Bearer "+sessionStorage.getItem("jwt"));
+      xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem("jwt"));
       xhr.send(JSON.stringify(employee));
 
       xhr.onload = function () {
-          console.log(this);
+        console.log(this);
       }
 
     }
