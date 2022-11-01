@@ -26,10 +26,7 @@
     
   }
 
-  body {
-    height: 100vh;
-    background: linear-gradient(0deg, black 36rem, red 53rem);
-  }
+
   .nav{
     border: 1px solid red;
   }
@@ -79,7 +76,7 @@
 .accordion-item{
   border: none;
 }
-  .name span {
+  .project-name span {
     /* text-shadow: 0px 7px 6vh rgb(255 0 0); */
     font-size: 10vh;
     text-transform: uppercase;
@@ -160,6 +157,9 @@
     line-height: 120px;
     text-indent: -21px;
     background-image: linear-gradient(120deg, #1ecee5 0%, #007b6b 100%);
+  }
+  dd{
+    margin-left: 20vh;
   }
 
   @keyframes morph {
@@ -417,6 +417,13 @@
       opacity: 1;
     }
   }
+  @font-face {
+    font-family: myFirstFont;
+    src: url(./font/Hacked-KerX.ttf);
+}
+  .project-name span{
+    font-family: myFirstFont;
+  }
 </style>
 
 <body>
@@ -548,19 +555,41 @@
         </div>
       </div>
 
+      <!-- <div class="col-md-9">
+        <div class="container my-3 text-center">
+          <div class="details">
+
+            <div class="project-name">
+              <span>project : </span>
+            </div>
+            <div class="allocation">
+              <span>allocation : </span>
+            </div>
+            <div class="duration">
+                <span>duration : </span>
+            </div>
+            <div class="employees">
+              <h1>Employees</h1>
+            </div>
+          </div>
+        </div>
+      </div> -->
       <div class="col-md-9">
         <div class="container my-3 text-center">
-          <div class="project-name">
-            <span></span>
+          <div class="project-name row">
+            <span class="flicker-4"></span>
           </div>
-          <div class="allocation">
-            <span></span>
-          </div>
-          <div class="duration">
-              <span></span>
-          </div>
-          <div class="employees">
-            <h1>Employees</h1>
+          <div class="details text-start">
+            <div class="allocation row">
+              <span>Allocation : <a></a></span>
+            </div>
+            <div class="duration row">
+              <span>Duration : <a></a></span>
+            </div>
+            <div class="employees row">
+              <dt>Employees </dt>
+            </div>
+           
           </div>
         </div>
       </div>
@@ -570,8 +599,8 @@
 
   <script>
     let projectName=document.querySelector(".project-name span");
-    let allocation=document.querySelector(".allocation span");
-    let duration=document.querySelector(".duration span");
+    let allocation=document.querySelector(".allocation span a");
+    let duration=document.querySelector(".duration span a");
     let employee=document.querySelector(".employees");
 
     let params = new URL(document.location).searchParams;
@@ -588,7 +617,7 @@
           projectName.innerHTML=project.projectModel.projectName;
           allocation.innerHTML=project.projectModel.allocation;
           duration.innerHTML=project.projectModel.duration;
-         let paragraph= document.createElement('p');
+         let paragraph= document.createElement('dd');
          paragraph.innerHTML=project.name;
             employee.append(paragraph);
       })

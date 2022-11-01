@@ -121,3 +121,14 @@ theadProject.addEventListener('click', (e) => {
 
   }
 })
+function search() { 
+  let empName=prompt("enter employee name");
+  const xhr=new XMLHttpRequest();
+  xhr.open("GET", "http://localhost:8080/api/search-employee/"+empName);
+  xhr.setRequestHeader("Authorization","Bearer "+sessionStorage.getItem("jwt"));
+  xhr.send();
+  xhr.onload=()=>{
+   let myWindow= window.open("","employyee","width:300,height:500");
+   myWindow.document.write(xhr.responseText)
+  }
+ }

@@ -182,7 +182,16 @@
     .accordion-body{
         background:black !important;
     }
-   
+    .search{
+        cursor: pointer;
+        font-size: 1.3em;
+        padding: 4%;
+        border-bottom: 1px solid white;
+    }
+    .search:hover{
+        background-color: white;
+        color: black;
+    }
 </style>
 
 <body>
@@ -323,7 +332,10 @@
                                 <div class="col-sm-8">
                                     <h2>Employee <b>Details</b></h2>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-2 ">
+                                   <span class="search" onclick="search()">search &#128269;</span>
+                                </div>
+                                <div class="col-sm-2">
                                     <button type="button" class="btn btn-outline-light add-new"
                                         onclick="location.href='./add-employee.html'"><i class="fa fa-plus"></i> Add
                                         New</button>

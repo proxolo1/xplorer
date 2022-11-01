@@ -159,7 +159,7 @@
                     <div class="text-center mt-4 name">
                         Register employee
                     </div>
-                    <form class="p-3 mt-3" action="login.html">
+                    <div class="p-3 mt-3">
                         <div class="form-field d-flex align-items-center">
                             <span class="far fa-user"></span>
                             <input type="text" name="userName" id="userName" placeholder="name" title="proxolo"
@@ -179,8 +179,8 @@
                             <input type="password" id="confirm-password" name="age" placeholder="confirm password"
                                 title="Password1$">
                         </div>
-                        <button class="btn mt-3" onclick="register()">register</button>
-                    </form>
+                        <button class="btn mt-3" id="register" onclick="register()" disabled>register</button>
+                    </div>
                     <div class="text-center fs-6">
                         <a href="login.html">already registered ?</a>
                     </div>
@@ -194,21 +194,62 @@
             hello
         </footer> -->
     <script>
-        let confirmPassword=document.querySelector("#confirm-password");
-       
+        let confirmPassword = document.querySelector("#confirm-password");
+        let userName = document.getElementById("userName");
+        let email = document.getElementById("email");
+        let password = document.getElementById("pwd");
+        let submit = document.getElementById("register");
+        let validation = {
+            userName: false,
+            email: false,
+            password: false
+        };
+        userName.addEventListener("input", () => {
+            if (userName.value.length <= 3) {
+                userName.style.color = "red";
+            }
+            else {
+                userName.style.color = "green";
+                validation.userName = true;
+            }
+        });
+        email.addEventListener("input", () => {
+            if (/^\S+@\S+\.\S+$/.test(email.value)) {
+                email.style.color = "green";
+                validation.email = true;
+            }
+            else {
+                email.style.color = "red";
+            }
+        })
+        password.addEventListener("input", () => {
+            if (/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(password.value)) {
+                password.style.color = "green";
+            }
+            else {
+                password.style.color = "red";
+            }
+        })
+        confirmPassword.addEventListener("input", () => {
+            if (password.value === confirmPassword.value) {
+                confirmPassword.style.color = "green"
+                validation.password = true;
+                if (validation.email && validation.password && validation.userName) {
+                    submit.disabled=false;
+                }
+            }
+            else {
+                confirmPassword.style.color = "red";
+            }
+
+        })
         function register() {
             let loginUrl = "http://localhost:8080/auth/register"
             let emailAndPassword = new Object({
-                name: document.getElementById("userName").value,
-                email: document.getElementById("email").value,
-                password: document.getElementById("pwd").value
+                name: userName.value,
+                email: email.value,
+                password: password.value
             });
-            for (let key in emailAndPassword) {
-                if (!emailAndPassword[key]) {
-                    alert(key + " required");
-                    return;
-                }
-            }
             const xhr = new XMLHttpRequest();
             xhr.open("POST", loginUrl, true);
             xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
@@ -216,10 +257,11 @@
 
             xhr.onload = function () {
                 console.log(this);
-                if(this.status==200){
+                if (this.status == 200) {
                     alert(this.responseText)
+                    location.href="login.html"
                 }
-                else{
+                else {
                     alert(this.responseText)
                 }
             }
